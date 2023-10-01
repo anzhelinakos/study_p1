@@ -1,7 +1,6 @@
-import pandas as pd
 import psutil
 import datetime
-import pandas
+
 
 def get_boottime_info():
     boottime=psutil.boot_time()
@@ -59,10 +58,8 @@ print(boottime)
 print(cputime_info)
 print(cpupercent_info)
 print(cpucount_info)
-#print(cpustats_info)
 print(cpufreq_info)
 print(virtualmemory_info)
-#print(diskpartitions_info)
 print(netiocounters)
 
 print("Process information:")

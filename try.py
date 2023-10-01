@@ -1,5 +1,4 @@
-var=[3,4,6,2,5,7]
-temp="data"
-fot i in range(len(var)):
-    temp +=":attr{"+str(i) +"}"
-print (temp)
+import psutil
+for p in psutil.process_iter():
+    proc={process_iter.pid},{process_iter.name}
+    print (proc)
