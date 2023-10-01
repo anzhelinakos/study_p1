@@ -30,8 +30,7 @@ def get_cpufreq_info():
     return info
 def get_virtualmemory_info():
     virtualmemory=psutil.virtual_memory()
-    #info=pd.DataFrame(virtualmemory,columns=['title','memory usage'])
-    info=f"System memory usage:\n    -total: {virtualmemory.total} bytes\n    -available: {virtualmemory.available} bytes\n    -used: {virtualmemory.used} bytes\n    -free: {virtualmemory.free} bytes\n    -active: {virtualmemory.active} bytes\n    -inactive: {virtualmemory.inactive} bytes\n"
+    info=f"System memory usage:\n    -total: {virtualmemory.total/(2**30)} Gb\n    -available: {virtualmemory.available/(2**30)} Gb\n    -used: {virtualmemory.used/(2**30)} Gb\n    -free: {virtualmemory.free/(2**30)} Gb\n    -active: {virtualmemory.active/(2**30)} Gb\n    -inactive: {virtualmemory.inactive/(2**30)} Gb\n"
     return info
 def get_diskpartitions_info():
     diskpartitions=psutil.disk_partitions()
@@ -39,7 +38,7 @@ def get_diskpartitions_info():
     return info
 def get_netiocounters_info():
     netinfocounters=psutil.net_io_counters()
-    info=f"Network statistic is:\n   - sent  {netinfocounters.bytes_sent} bytes\n   - recived {netinfocounters.bytes_recv} bytes\n"
+    info=f"Network statistic is:\n   - sent  {netinfocounters.bytes_sent/(2**30)} Gb\n   - recived {netinfocounters.bytes_recv/(2**30)} Gb\n"
     return info
 
 
@@ -55,6 +54,7 @@ diskpartitions_info=get_diskpartitions_info()
 netiocounters=get_netiocounters_info()
 
 
+
 print(boottime)
 print(cputime_info)
 print(cpupercent_info)
@@ -65,8 +65,9 @@ print(virtualmemory_info)
 #print(diskpartitions_info)
 print(netiocounters)
 
-
-for proc in psutil.process_iter(['pid', 'name', 'username']):
-    print(proc.info)
+print("Process information:")
+for proc in psutil.process_iter():
+    p=f"pid={proc.pid}, Name of process is  {proc.name()},   Current status: {proc.status()}"
+    print (p)
 
 
