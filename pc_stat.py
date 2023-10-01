@@ -30,7 +30,7 @@ def get_cpufreq_info():
     return info
 def get_virtualmemory_info():
     virtualmemory=psutil.virtual_memory()
-    info=f"System memory usage:\n    -total: {virtualmemory.total/(2**30)} Gb\n    -available: {virtualmemory.available/(2**30)} Gb\n    -used: {virtualmemory.used/(2**30)} Gb\n    -free: {virtualmemory.free/(2**30)} Gb\n    -active: {virtualmemory.active/(2**30)} Gb\n    -inactive: {virtualmemory.inactive/(2**30)} Gb\n"
+    info=f"System memory usage:\n    -total: {round(virtualmemory.total/(2**30),3)} Gb\n    -available: {round(virtualmemory.available/(2**30),3)} Gb\n    -used: {round(virtualmemory.used/(2**30),3)} Gb\n    -free: {round(virtualmemory.free/(2**30),3)} Gb\n    -active: {round(virtualmemory.active/(2**30),3)} Gb\n    -inactive: {round(virtualmemory.inactive/(2**30),3)} Gb\n"
     return info
 def get_diskpartitions_info():
     diskpartitions=psutil.disk_partitions()
@@ -38,7 +38,7 @@ def get_diskpartitions_info():
     return info
 def get_netiocounters_info():
     netinfocounters=psutil.net_io_counters()
-    info=f"Network statistic is:\n   - sent  {netinfocounters.bytes_sent/(2**30)} Gb\n   - recived {netinfocounters.bytes_recv/(2**30)} Gb\n"
+    info=f"Network statistic is:\n   - sent  {round(netinfocounters.bytes_sent/(2**30),3)} Gb\n   - recived {round(netinfocounters.bytes_recv/(2**30),3)} Gb\n"
     return info
 
 
