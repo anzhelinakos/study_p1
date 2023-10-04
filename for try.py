@@ -1,12 +1,11 @@
 import psutil
 import datetime
 
-
 def get_boottime_info():
     boottime=psutil.boot_time()
     info = datetime.datetime.fromtimestamp(boottime).strftime("%Y-%m-%d %H:%M:%S")
-    info1=(f"\nLast boot of this PC was {info}\n")
-    return info1
+    boottime_info=f"\nLast boot of this PC was {info}\n"
+    return boottime_info
 def get_cputime_info():
     cputime = psutil.cpu_times()
     info = f"Current values of system CPU times for:\n   -user is {cputime.user} s; \n   -nice is {cputime.nice} s; \n   -system is {cputime.system} s; \n   -idle is {cputime.idle} s.\n"
@@ -41,7 +40,6 @@ def get_netiocounters_info():
     return info
 
 
-
 boottime=get_boottime_info()
 cputime_info=get_cputime_info()
 cpupercent_info=get_cpupercent_info()
@@ -64,7 +62,7 @@ print(netiocounters)
 
 print("Process information:")
 for proc in psutil.process_iter():
-    p=f"pid={proc.pid}, Name of process is  {proc.name()},   Current status: {proc.status()}"
-    print (p)
+    process_info=f"pid={proc.pid}, Name of process is  {proc.name()},   Current status: {proc.status()}"
+    print (process_info)
 
 
