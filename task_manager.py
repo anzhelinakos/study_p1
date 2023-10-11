@@ -1,6 +1,7 @@
 import psutil
 import datetime
 
+
 def record_info(func):
     file_name = "info_record.log"
     info_string = "{0} ({1})\n"
@@ -8,9 +9,10 @@ def record_info(func):
     def record_info_worker():
         res = func()
         with open(file_name, "a") as info_record_file:
-            info_record_file.write(info_string.format(datetime.datetime.now(),res))
+            info_record_file.write(info_string.format(datetime.datetime.now(), res))
         return res
     return record_info_worker
+
 
 @record_info
 def get_cputime_info():
@@ -18,32 +20,30 @@ def get_cputime_info():
             "nice": psutil.cpu_times().nice,
             "system": psutil.cpu_times().system,
             "idle": psutil.cpu_times().idle}
-cputime_info = get_cputime_info()
+
 
 @record_info
 def get_cpupercent_info():
     return psutil.cpu_percent()
-cpupercent_info = get_cpupercent_info()
+
 
 @record_info
 def get_cpucount_info():
     return psutil.cpu_count()
-cpucount_info = get_cpucount_info()
+
 
 @record_info
 def get_cpufreq_info():
     return psutil.cpu_freq()
-cpufreq_info = get_cpufreq_info()
+
 
 @record_info
 def get_virtualmemory_info():
     return psutil.virtual_memory()
-virtualmemory_info = get_virtualmemory_info()
 
 
 def get_netiocounters_info():
     return psutil.net_io_counters()
-netinfocounters_info = get_netiocounters_info()
 
 
 def show_boottime_info():
@@ -60,7 +60,6 @@ def show_cputime_info(cputime_info):
                          f"-system is {cputime_info['system']} s; \n   "
                          f"-idle is {cputime_info['idle']} s.\n")
     print(cputime_info_edit)
-
 
 
 def show_cpupercent_info(cpupercent_info):
@@ -104,10 +103,13 @@ def show_processes_info():
     return
 
 
-
-
-
 def main():
+    cputime_info = get_cputime_info()
+    cpupercent_info = get_cpupercent_info()
+    cpucount_info = get_cpucount_info()
+    cpufreq_info = get_cpufreq_info()
+    virtualmemory_info = get_virtualmemory_info()
+    netinfocounters_info = get_netiocounters_info()
     show_boottime = show_boottime_info()
     show_cputime = show_cputime_info(cputime_info)
     show_cpupercent = show_cpupercent_info(cpupercent_info)
